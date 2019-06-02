@@ -1,0 +1,22 @@
+{
+  "name": "y",
+  "version": "y",
+  "main": "index.js",
+  "author": "zan-rosenthal",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon --exec babel-node index.js"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/node": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "apollo-server": "^2.6.1",
+    "axios": "^0.19.0",
+    "faker": "^4.1.0",
+    "graphql": "^14.3.1",
+    "nodemon": "^1.19.1",
+    "ramda": "^0.26.1"
+  }
+}
