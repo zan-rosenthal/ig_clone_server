@@ -3,13 +3,13 @@ import {
   join,
   map,
   range,
+  toLower,
   splitEvery,
   take
 } from 'ramda'
 import faker from 'faker'
-import axios from 'axios'
 
-// const formatIntro = compose(join('\n'), splitEvery(20), take(80))
+const formatIntro = compose(join('\n'), splitEvery(20), take(60))
 
 const commentFactory = () => ({
   id: faker.random.number(),
@@ -20,13 +20,18 @@ const commentFactory = () => ({
 const postFactory = (userName = faker.internet.userName()) => () => ({
   id: faker.random.number(),
   comments: map(commentFactory, range(1, 10)),
-  url: `https://picsum.photos/200/300?random=${faker.random.number()}`,
+  imageUrl: `https://picsum.photos/200/300?random=${faker.random.number()}`,
   user: { userName },
-  location: `${faker.address.city()}, ${faker.address.state()}`
+  location: `${faker.address.city()}, ${faker.address.state()}`,
+  text: faker.lorem.paragraph(),
+  title: faker.lorem.word()
 })
 
 const userFactory = () => {
-  const userName = faker.internet.userName()
+  const firstName = faker.name.firstName()
+  const lastName = faker.name.lastName()
+  const fullName = `${firstName} ${lastName}`
+  const userName = `${toLower(firstName)}_${toLower(lastName)}` 
 
   return {
     id: faker.random.number(),
@@ -34,8 +39,8 @@ const userFactory = () => {
     following: faker.random.number(),
     profileImage: 'https://fillmurray.com/200/300',
     userName,
-    fullName: `${faker.name.firstName()} ${faker.name.lastName()}`,
-    profileIntro: faker.lorem.lines(),
+    fullName,
+    profileIntro: formatIntro(faker.lorem.sentences()),
     posts: map(postFactory(userName), range(1, 60))
   }
 }

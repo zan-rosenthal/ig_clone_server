@@ -6,7 +6,6 @@ export default gql`
     users: [User],
     post: Post,
     posts: [Post],
-    comments: [Comment]
   }
   
   type User {
@@ -20,16 +19,12 @@ export default gql`
     profileIntro: String!
   }
 
-  type Comment {
-    id: Int!,
-    text: String!
-  }
-
   type Post {
     id: Int!,
-    comments: [Comment]!,
     user: User!,
-    url: String!,
+    imageUrl: String!,
     location: String!
+    text: String!,
+    title: String!,
   }
 `;
